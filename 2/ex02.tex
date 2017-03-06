@@ -1,0 +1,119 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 12}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+Os eventos \mathcal{A} e \mathcal{B} podem ser independentes, se e somente se
+\begin{equation}
+ 	Pr(\mathcal{A} \cap \mathcal{B}) = Pr(\mathcal{A}) . Pr(\mathcal{B})
+ \end{equation} 
+
+\section{Exercício 2}
+\newtheorem{teo1}{Teorema}
+\begin{teo1}
+    Demonstre que a Lei das Probabilidades Totais é verdadeira
+\end{teo1}
+\begin{proof}
+    \hfill \break
+    Como 
+    \begin{equation}
+    \notag
+        \bigcup_{i=1}^n E_i = \Omega
+    \end{equation}
+    então
+    \begin{equation}
+    	B = B \cap \Omega = B \cap \bigcup_{i=1}^{n}E_i = \bigcup_{i=1}^n {B \cap E_i}
+    \end{equation}
+    Como os conjuntos são disjuntos, podemos afirmar que para $i \neq j, {B \cap E_i} \cap {B \cap E_j} = emptyset$
+    
+    Daí temos
+    \begin{equation}
+        Pr(B} = \sum\limits_{i = 1}^{n}Pr(B \cap E_i)
+    \end{equation}
+
+    A partir da Definição 1.3 do livro temos
+    \begin{equation}
+    	Pr(B) = \sum\limits_{i = 1}^{n}Pr(B | E_i).Pr(E_i)
+    \end{equation}
+\end{proof}
+
+\section{Exercício 3}
+Dados duas moedas, uma com duas caras e outra normal, temos
+\begin{equation}
+	\notag
+	\begin{split}
+		\text{chance de cair cara }H =& \dfrac{3}{4}\\
+		\text{chance de cair coroa }T =& \dfrac{1}{4}\\
+	\end{split}
+\end{equation}
+e também
+\begin{equation}
+	\notag
+	\begin{split}
+		\text{chance de pegar moeda viciada }MV =& \dfrac{1}{2}\\
+		\text{chance de pegar moeda normal }MN =& \dfrac{1}{2}\\
+	\end{split}
+\end{equation}
+Levando em conta que pegamos uma moeda aleatoriamente e o resultado é $cara$,
+então a probabilidade de termos o evento $MV$ dado que $H$, temos que a probabilidade
+de ter tirado a moeda viciada seja de:
+
+\begin{equation}
+	\notag
+	\begin{split}
+		Pr(MV | H).Pr(H) = \dfrac{1}{2}*\dfrac{3}{4} = \dfrac{3}{8}
+	\end{split}
+\end{equation}
+\end{document}
