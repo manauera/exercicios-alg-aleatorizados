@@ -60,12 +60,12 @@
     Dados eventos $E_1, E_2$, ... temos
     \begin{equation}
     \notag
-        Pr(\bigcup\limits_{i \geq 1}^{n} E_i ) \leq \sum\limits_{i \geq 1}^{n}Pr(E_i)
+        Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i\right) \leq \sum\limits_{i \geq 1}^{n}Pr(E_i)
     \end{equation}
 \end{teo1}
 \begin{proof}
     \hfill \break
-    \textbf{Base} : Para $i = 2$, temos
+    \hspace*{20pt} \textbf{Base} : Para $i = 2$, temos
     \begin{equation}
     \notag
         \begin{split}
@@ -73,20 +73,23 @@
             Pr(E_1) + Pr(E_2) - Pr(E_1 \cap E_2) \leq& Pr(E_1) + Pr(E_2)
         \end{split}
     \end{equation}
-    \hspace*{30pt} o que é verdade.
+    \hspace*{30pt} o que é verdade.\\
+
     \textbf{Hipótese} : Vamos assumir que a equação
     \begin{equation}
-        Pr(\bigcup\limits_{i \geq 1}^{n} E_i ) \leq \sum\limits_{i \geq 1}^{n}Pr(E_i)
+        Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i\right) \leq \sum\limits_{i \geq 1}^{n}Pr(E_i)
     \end{equation}
-    \hspace*{30pt} está correta para um $k \leq n$.
+    \hspace*{30pt} está correta para um $k \leq n$.\\
+
     \textbf{Passo} : quero provar que para $k = n + 1$ a o hipótese segura
-    \hspace*{30pt} Assim temos \newline
+
+    Assim temos \newline
     \begin{equation}
     \notag
         \begin{split}
-            Pr(\bigcup\limits_{i \geq 1}^{n+1} E_i ) \leq& \sum\limits_{i \geq 1}^{n+1}Pr(E_i)\\
-            Pr(\bigcup\limits_{i \geq 1}^{n} E_i \cup E_{n+1}) \leq & \sum\limits_{i \geq 1}^{n}Pr(E_i) + Pr(E_{n+1})\\
-            Pr(\bigcup\limits_{i \geq 1}^{n} E_i) + Pr(E_{n+1}) - Pr\left(\left[\bigcup\limits_{i \geq 1}^{n} E_i\right]\cap E_{n+1}\right)  \leq &\\
+            Pr\left(\bigcup\limits_{i \geq 1}^{n+1} E_i \right) \leq& \sum\limits_{i \geq 1}^{n+1}Pr(E_i)\\
+            Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i \cup E_{n+1}\right) \leq & \sum\limits_{i \geq 1}^{n}Pr(E_i) + Pr(E_{n+1})\\
+            Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i\right) + Pr(E_{n+1}) - Pr\left(\left[\bigcup\limits_{i \geq 1}^{n} E_i\right]\cap E_{n+1}\right)  \leq &Pr(E_{n+1})\\
             \text{pela hipótese de indução, temos}&\\
             Pr(E_{n+1}) - Pr\left(\left[\bigcup\limits_{i \geq 1}^{n} E_i\right]\cap E_{n+1}\right) \leq & Pr(E_{n+1})
         \end{split}
@@ -101,11 +104,11 @@
     \begin{equation}
     \notag
         \begin{split}
-            Pr(\bigcup_{i = 1}^{n}E_i) =& \sum\limits_{i=1}^{n}Pr(E_i)\\
+            Pr\left(\bigcup_{i = 1}^{n}E_i\right) =& \sum\limits_{i=1}^{n}Pr(E_i)\\
             & -\sum\limits_{1\leq i<j\leq n}^{n}Pr(E_i \cap E_j)\\
             & +\sum\limits_{1\leq i<j<k\leq n}^{n}Pr(E_i \cap E_j \cap E_k)\\
             & \ldots\\
-            & +(-1)^{n-1}Pr(\bigcap_{i=1}^{n}E_i)
+            & +(-1)^{n-1}Pr\left(\bigcap_{i=1}^{n}E_i\right)
         \end{split}
     \end{equation}
 \end{teo2}
@@ -122,7 +125,7 @@
     \begin{equation}
     \notag
         \begin{split}
-            Pr(\bigcup_{i = 1}^{r}E_i) =& \sum\limits_{i=1}^{r}Pr(E_i)\\
+            Pr\left(\bigcup_{i = 1}^{r}E_i\right) =& \sum\limits_{i=1}^{r}Pr(E_i)\\
             & -\sum\limits_{1\leq i<j\leq r}^{r}Pr(E_i \cap E_j)\\
             & +\sum\limits_{1\leq i<j<k\leq r}^{r}Pr(E_i \cap E_j \cap E_k)\\
             & \ldots\\
@@ -133,20 +136,22 @@
     \begin{equation}
     \notag
         \begin{split}
-            Pr(\bigcup_{i = 1}^{r+1}E_i) =& \sum\limits_{i=1}^{r+1}Pr(E_i)\\
+            Pr\left(\bigcup_{i = 1}^{r+1}E_i\right) =& \sum\limits_{i=1}^{r+1}Pr(E_i)\\
             & -\sum\limits_{1\leq i<j\leq r+1}^{r}Pr(E_i \cap E_j)\\
             & +\sum\limits_{1\leq i<j<k\leq r+1}^{r}Pr(E_i \cap E_j \cap E_k)\\
             & \ldots\\
-            & +(-1)^{(r+1)-1}Pr(\bigcap_{i=1}^{r+1}E_i)
+            & +(-1)^{(r+1)-1}Pr\left(\bigcap_{i=1}^{r+1}E_i\right)
         \end{split}
     \end{equation}
+
     \textbf{Passo} : quero provar que para $k = n + 1$ a o hipótese segura para $r + 1$
+
     \hspace*{30pt} Assim temos \newline
     \begin{equation}
     \label{eq:dev}
         \begin{split}
-            Pr(\bigcup_{i = 1}^{r+1}E_i) =& Pr(\bigcup_{i = 1}^{r+1}E_i \cup E_{r+1})\\
-            =& Pr(\bigcup_{i = 1}^{r+1}E_i) + Pr(E_{r+1}) - Pr(\bigcup_{i = 1}^{r+1}E_i \cup E_{r+1})
+            Pr\left(\bigcup_{i = 1}^{r+1}E_i\right) =& Pr\left(\bigcup_{i = 1}^{r+1}E_i \cup E_{r+1}\right)\\
+            =& Pr\left(\bigcup_{i = 1}^{r+1}E_i) + Pr(E_{r+1}\right) - Pr\left(\bigcup_{i = 1}^{r+1}E_i \cup E_{r+1}\right)
         \end{split}
     \end{equation}
     Considerando 
@@ -158,17 +163,17 @@
 
     \begin{equation}
         \notag
-        Pr(\bigcup_{i = 1}^{r+1}(E_i \cup E_{r+1}))
+        Pr\left(\bigcup_{i = 1}^{r+1}(E_i \cup E_{r+1})\right)
     \end{equation}
     Sendo assim, podemos aplicar a hipótese de indução
     \begin{equation}
     \notag
         \begin{split}
-            Pr(\bigcup_{i = 1}^{r+1}(E_i \cup E_{r+1})) =& \sum\limits_{i=1}^{r}Pr(E_i \cap E_{r+1})\\
+            Pr\left(\bigcup_{i = 1}^{r+1}(E_i \cup E_{r+1})\right) =& \sum\limits_{i=1}^{r}Pr(E_i \cap E_{r+1})\\
             & -\sum\limits_{1\leq i<j\leq r}^{r}Pr(E_i \cap E_j \cap E_{r+1})\\
             & +\sum\limits_{1\leq i<j<k\leq r}^{r}Pr(E_i \cap E_j \cap E_k \cap E_{r+1})\\
             & \ldots\\
-            & +(-1)^{r-1}Pr(\bigcap_{i=1}^{r}E_i \cap E_{r+1})
+            & +(-1)^{r-1}Pr\left(\bigcap_{i=1}^{r}E_i \cap E_{r+1}\right)
         \end{split}
     \end{equation}
     Substituindo na equação \ref{eq:dev}, temos

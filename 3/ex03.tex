@@ -1,0 +1,105 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 12}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\hspace*{30pt}No caso do lema 1.5 do livro, temos que algum elemento
+da matriz tem que ser diferente de zero, então não há perda de generalidade 
+se definir que o elemento é o $D_{11}$, do mesmo jeito que pode-se definir 
+qualquer outro elemento, geralmente a escolha é feita para simplificação 
+da prova.
+
+\section{Exercício 2}
+\hspace*{30pt}A probabilidade condicional se refere à probabilidade
+de um evento A ocorrer, dado que um outro evento B já tenha ocorrido.
+
+Caso, sejam independentes, não muda a probabilidade de A acontecer, mas
+se forem dependentes a probabilidade de A ocorrer pode ser maior ou menor
+dependendo da situação.
+
+Para casos em que queremos que A ocorra, a relação de tempo físico,
+seria que se B ocorreu, A eventualmente irá ocorrer. 
+
+\section{Exercício 3}
+\textit{Suppose that we roll ten standard six-sided dice. What is the probability 
+that their sum will be divisible by 6, assuming that the rolls are independent? }
+
+\hspace*{30pt} Se jogarmos \textbf{9 dados} e seja o resultado da soma parcial $x$,
+também considerar que o resultado do último dado seja $n \in \{1,2,3,4,5,6\}$, então
+para que a soma $n + x$ seja divisível por 6, o último dado tem que ser $n = 6$,
+independente do valor de $x$. Então temos que a probabilidade que estamos procurando,
+em todas as possíveis somas, é:
+\begin{equation}
+\notag
+    Pr(n=6) = \dfrac{1}{6}
+\end{equation}
+
+\section{Exercício 4}
+\subsection*{(a)}
+\textit{Consider the set {1, ... , n}. We generate a subset X of this set as fol-
+lows: a fair coin is flipped independently for each element of the set: if the coin lands
+heads then the element is added to X, and otherwise it is not. Argue that the resulting
+set X is equally likely to be anyone of the 2" possible subsets.}\\
+
+\< não soube responder a tempo de entregar \>
+
+\subsection*{(b)}
+\textit{Suppose that two sets X and Yare chosen independently and uniformly at ran-
+dom from all the 211 subsets of {l, ... ,n}. Determine Pr(X ~ Y) and Pr(X U Y =
+11 .... , n D. (Hint: Use the part (a) of this problem.)}\\
+
+\< não soube responder a tempo de entregar \>
+
+\end{document}
