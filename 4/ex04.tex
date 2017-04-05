@@ -1,0 +1,107 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 12}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\textbf{To improve the probability of success of the randomized min-cut algo-
+rithm, it can be run multiple times.}
+\subsection*{(a)} 
+\textbf{Consider running the algorithm twice. Determine the number of edge contractions
+and bound the probability of finding a min-cut.}\\
+
+A quantidade esperada de arestas contraídas na execução do algoritmo é de pelo menos $\frac{nk}{2} - k$,
+onde $n$ é a quantidade de vértices e $k$ o corte mínimo. Assumindo que as últimas $k$
+arestas não serão contraídas por estarem no corte mínimo.\\
+
+A probabilidade de achar o corte mínimo executando o algoritmo aleatorizado duas vezes 
+é de pelo menos $\frac{4}{n^2(n-1)^2}$.
+
+
+\subsection*{(b)} 
+\textbf{Consider the following variation. Starting with a graph with n vertices, first 
+contract the graph down to k vertices using the randomized min-cut algorithm. Make
+copies of the graph with k vertices, and now run the randomized algorithm on this
+reduced graph $l$ times, independently. Determine the number of edge contractions
+and bound the probability of finding a minimum cut.}\\
+
+Se executarmos o CMA (Corte Mínimo Aleatorizado) para $k$ vértices independentemente
+$e$ vezes, temos a probabilidade\\
+
+\begin{equation}
+\notag
+    \left(\frac{2}{k(k-1)}\right)^{l+c}
+\end{equation}
+onde $c$ é o número de cópias.\\
+
+E o número esperado de arestas contraídas é
+
+\begin{equation}
+    \notag
+    \left(\frac{km}{2} - m\right).c
+\end{equation} 
+onde $c$ é o número de cópias e $m$ o corte mínimo.
+\subsection*{(c)} 
+\textbf{Find optimal (or at least near-optimal) values of k and t for the variation
+in (b) that maximize the probability of finding a minimum cut while using the same number
+of edge contractions as running the original algorithm twice.}
+
+\section{Exercício 2}
+\textbf{Generalizing on the notion of a cut-set, we define an r-way cut-set in a
+graph as a set of edges whose removal breaks the graph into r or more connected 
+components. Explain how the randomized min-cut algorithm can be used to find minimum
+r-way cut-sets, and bound the probability that it succeeds in one iteration.}
+
+
+\end{document}

@@ -55,7 +55,7 @@
 
 \chapter{}
 \section{Exercício 1}
-Os eventos \mathcal{A} e \mathcal{B} podem ser independentes, se e somente se
+Os eventos $\mathcal{A}$ e $\mathcal{B}$ podem ser independentes, se e somente se
 \begin{equation}
  	Pr(\mathcal{A} \cap \mathcal{B}) = Pr(\mathcal{A}) . Pr(\mathcal{B})
  \end{equation} 
@@ -76,16 +76,16 @@ Os eventos \mathcal{A} e \mathcal{B} podem ser independentes, se e somente se
     \begin{equation}
     	B = B \cap \Omega = B \cap \bigcup_{i=1}^{n}E_i = \bigcup_{i=1}^n {B \cap E_i}
     \end{equation}
-    Como os conjuntos são disjuntos, podemos afirmar que para $i \neq j, {B \cap E_i} \cap {B \cap E_j} = emptyset$
+    Como os conjuntos são disjuntos, podemos afirmar que para $i \neq j, \{B \cap E_i\} \cap \{B \cap E_j\} = emptyset$
     
     Daí temos
     \begin{equation}
-        Pr(B} = \sum\limits_{i = 1}^{n}Pr(B \cap E_i)
+        Pr(B) = \sum\limits_{i = 1}^{n}Pr(B \cap E_i)
     \end{equation}
 
     A partir da Definição 1.3 do livro temos
     \begin{equation}
-    	Pr(B) = \sum\limits_{i = 1}^{n}Pr(B | E_i).Pr(E_i)
+    	Pr(B) = \sum\limits_{i = 1}^{n}Pr(B | E_i) . Pr(E_i)
     \end{equation}
 \end{proof}
 
@@ -113,7 +113,9 @@ de ter tirado a moeda viciada seja de:
 \begin{equation}
 	\notag
 	\begin{split}
-		Pr(MV | H).Pr(H) = \dfrac{1}{2}*\dfrac{3}{4} = \dfrac{3}{8}
+		Pr(MV | H).Pr(H) = & \dfrac{Pr(MV \cap H)}{Pr(H)}\\
+        & \dfrac{}
+        &\dfrac{1}{2}*\dfrac{3}{4} = \dfrac{3}{8}
 	\end{split}
 \end{equation}
 \end{document}
