@@ -1,0 +1,101 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 8}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\hspace*{15pt}Para uma permutação de tamanho $n$, então seja $X_{ij} = 1$ 
+se $(i,j)$ é uma inversão, $X_{ij} = 0$ c.c . Então, 
+
+\begin{equation}
+\notag
+	E[X_{ij}] = Pr(\{i,j\}\text{ ser uma inversão}) = \dfrac{1}{2}
+\end{equation}
+
+É fácil de ver que para um par $(i,j)$ que é uma inversão, o par $(j,i)$ não é uma 
+inversão.\\
+
+Disso temos\\
+
+\begin{equation}
+\notag
+\begin{split}
+	E[\sum\limits_{i=1}^{n-1}\sum\limits_{j=i+1}^{n}X_{ij}] &= \sum\limits_{i=1}^{n-1}\sum\limits_{j=i+1}^{n}E[X_{ij}] \\
+	&= \sum\limits_{i=1}^{n-1}\sum\limits_{j=i+1}^{n} \dfrac{1}{2}\\
+	&= \dfrac{1}{2}\sum\limits_{i=1}^{n-1}\sum\limits_{j=i+1}^{n} 1\\
+	&= \dfrac{1}{2}\sum\limits_{i=1}^{n-1} (n - (i+1) + 1)\\
+	&= \dfrac{1}{2}\sum\limits_{i=1}^{n-1} (n-i)\\
+	&= \dfrac{1}{2}\left[\sum\limits_{i=1}^{n-1} n - \sum\limits_{i=1}^{n-1} i \right]\\
+	&= \dfrac{1}{2}\left[n(n-1) - \dfrac{n(n-1)}{2} \right]\\
+	&= \dfrac{n(n-1)}{4}
+\end{split}
+\end{equation}
+
+\section{Exercício 2}
+\hspace*{15pt}O número esperado de trocas realizadas no k-ésimo elemento, será
+
+\begin{equation}
+	\notag
+	E[\text{trocas}] = \sum\limits_{i=0}^{k-1} i \dfrac{1}{k}
+\end{equation}
+
+Então, o número esperado de trocas para todo o insertion sort dado uma permutação
+aleatória é a soma de todas as esperanças até $n$, então temos que o número esperado
+de trocas realizadas em toda execução do algoritmo para um vetor aleatório é:
+
+\begin{equation}
+\notag
+	\sum\limits_{i=1}^{n}E[\text{trocas}] = \sum\limits_{i=1}^{n}\sum\limits_{j=0}^{i-1} j \dfrac{1}{i} =\dfrac{n(n-1)}{4}
+\end{equation}
+\end{document}
