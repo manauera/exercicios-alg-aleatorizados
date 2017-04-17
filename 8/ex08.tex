@@ -87,7 +87,7 @@ Disso temos\\
 
 \begin{equation}
 	\notag
-	E[\text{trocas}] = \sum\limits_{i=0}^{k-1} i \dfrac{1}{k}
+	E[\text{trocas}] = \sum\limits_{i=0}^{k-1} i \dfrac{1}{k} = \dfrac{k-1}{2}
 \end{equation}
 
 Então, o número esperado de trocas para todo o insertion sort dado uma permutação
@@ -96,6 +96,6 @@ de trocas realizadas em toda execução do algoritmo para um vetor aleatório é
 
 \begin{equation}
 \notag
-	\sum\limits_{i=1}^{n}E[\text{trocas}] = \sum\limits_{i=1}^{n}\sum\limits_{j=0}^{i-1} j \dfrac{1}{i} =\dfrac{n(n-1)}{4}
+	\sum\limits_{i=1}^{n}E[\text{trocas}] = \sum\limits_{i=1}^{n} \dfrac{(i-1)}{2} =\dfrac{n(n-1)}{4}
 \end{equation}
 \end{document}

@@ -1,0 +1,113 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 9}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\hspace*{15pt}
+\begin{equation}
+	\begin{split}
+		Var[X] &= E[(X-E[X])^2]\\
+		\text{pela Def 3.2 do MU}&\\
+		&= E[X^2] - (E[X])^2\\
+		&= \sum\limits_{i=1}^{n}\dfrac{1}{n}.i^2 - \left(\sum\limits_{i=1}^{n}\dfrac{1}{n}.i\right)^2\\
+		&= \dfrac{(n+1)(2n+1)}{6} - \left(\dfrac{n+1}{2}\right)^2\\
+		&= \dfrac{2n^2 + 4n + 1}{6} - \dfrac{n^2 + 2n + 1}{4}\\
+		&= \dfrac{2(2n^2 + 4n + 1) - 3(n^2 + 2n + 1)}{12}\\
+		&= \dfrac{4n^2 + 8n + 2 - 3n^2 - 6n - 3}{12}\\
+		&= \dfrac{n^2 + 2n - 1}{12}\\
+		&= \dfrac{(n+1)(n-1)}{12}
+	\end{split}
+\end{equation}
+
+\section{Exercício 2}
+\begin{equation}
+	\begin{split}
+		Var[X] &= E[X^2] - (E[X])^2\\
+		&= 2\sum\limits_{i=-k}^{k}\dfrac{1}{2k+1}.i^2 - \sum\limits_{i=-k}^{k}\dfrac{1}{2k+1}\\
+		&= \dfrac{k(k+1)}{3} - 0 \\
+		&= \dfrac{k(k+1)}{3}
+	\end{split}
+\end{equation}
+
+\section{Exercício 3}
+\begin{proof}
+\begin{equation}
+	\begin{split}
+		Var[cX] &= E[(cX)^2] - (E[cX])^2\\
+		&= E[c^2X^2] - (cE[X])^2(\text{pela lin. da esperança})\\
+		&= c^2E[X^2] - c^2 (E[X]^2) (\text{de novo pela lin. da esperança})\\
+		&= c^2(E[X^2] - (E[X])^2)\\
+		&= c^2Var[X]
+	\end{split}
+\end{equation}
+\end{proof}
+
+\section{Exercício 4}
+\begin{proof}
+	\hspace*{15pt}Pela definição,
+	\begin{equation}
+		\notag
+		Pr(X \geq a) = \dfrac{E[X]}{a}
+	\end{equation}
+	para um $a > 0$.\\
+
+	Se temos $a = kE[X]$, então
+	\begin{equation}
+		\notag
+		Pr(X \geq kE[X]) = \dfrac{E[X]}{kE[X]} = \dfrac{1}{k}
+	\end{equation}
+	para uma v.a. X que assuma apenas valores não negativos.
+\end{proof}
+\end{document}
