@@ -1,0 +1,128 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 5}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\begin{proof}
+    Do teorema binomial, temos
+    \begin{equation}
+        \notag
+        (x + y)^n = \sum\limits_{j=0}^{n} {n \choose j}x^j y^{n-j}
+    \end{equation}
+
+    Então, se definirmos $x = p$ e $y = 1 - p$, temos o seguinte
+
+    \begin{equation}
+        \notag
+        \begin{split}
+            (p + 1-p)^n &= \sum\limits_{j=0}^{n} {n \choose j}p^j (1-p)^{n-j}\\
+            1^n &= \sum\limits_{j=0}^{n} {n \choose j}p^j (1-p)^{n-j}
+        \end{split}
+    \end{equation}
+
+    Como $1^n$ é sempre $1$, podemos afirmar que a soma de todas as probabilidades
+    de uma variável aleatória binomial é também $1$. 
+\end{proof}
+
+\section{Exercício 2}
+O exemplo mais trivial que temos é quando queremos saber a probabilidade de 
+acertar um número $k$ de caras, numa quantidade de $n$ lances de moeda.
+
+\section{Exercício 3}
+\begin{proof}
+    \begin{equation}
+        \notag
+        \begin{split}
+            E[X] &= \sum\limits_{j} j {n \choose j} p^j(1-p)^{n-j}\\
+            &= \sum\limits_{j} \dfrac{n!}{(j-1)!(n-j)!} p^j(1-p)^{n-j}\\
+            &= n.p \sum\limits_{j} \dfrac{(n-1)!}{(j-1)!((n-1)-(j-1)!} p^{j-1}(1-p)^{(n-1)-(j-1)}\\
+            &= n.p \sum\limits_{k}^{n-1} {n-1 \choose k} p^k(1-p)^{(n-1)-k}\\
+            &= n.p
+        \end{split}
+    \end{equation}
+\end{proof}
+
+\section{Exercício 4}
+\subsection*{(a)}
+Temos
+\begin{equation}
+    \notag
+    Pr(X = 1) = {n \choose 1}p(1-p)^{n-1} = \dfrac{n!}{(n-1)!}p(1-p)^{n-1} = np(1-p)^{n-1}
+\end{equation}
+
+\subsection*{(b)}
+Considerando que não temos ninguém positivo ou pelo menos uma pessoa, ficamos com o seguinte
+\begin{equation}
+    \notag
+    E[X] = \dfrac{n}{k} * np(1-p)^{n-1}
+\end{equation}
+
+\subsection*{(c)}
+Escolher um número $k$ de pessoas tal que $k * p < 1$. 
+
+Ou seja, que tenha menos de uma pessoa por grupo de usuários, caso contrário,
+teremos pelo menos uma pessoa por grupo, e isso significaria que terá de testar 
+individualmente para todos os usuários, além dos testes do grupo.
+
+\subsection*{(d)}
+Levando em consideração que temos uma probabilidade ideal de termos uma pessoa
+positiva no grupo, ou seja, que seja como na resposta anterior (c). Podemos afirmar
+que teremos pelo menos um grupo com todas as k pessoas positivas. Então, se possuirmos 
+$\dfrac{n}{k}$ grupos, ficamos com
+\begin{equation}
+    \notag
+    (k-1) * (\dfrac{n - k}{k}) \leq k * n
+\end{equation}
+\end{document}

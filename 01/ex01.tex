@@ -1,0 +1,204 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 12}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\newtheorem{teo1}{Teorema}
+\begin{teo1}
+    Dados eventos $E_1, E_2$, ... temos
+    \begin{equation}
+    \notag
+        Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i\right) \leq \sum\limits_{i \geq 1}^{n}Pr(E_i)
+    \end{equation}
+\end{teo1}
+\begin{proof}
+    \hfill \break
+    \hspace*{20pt} \textbf{Base} : Para $i = 2$, temos
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr(E_1 \cup E_2) \leq& Pr(E_1) + Pr(E_2)\\
+            Pr(E_1) + Pr(E_2) - Pr(E_1 \cap E_2) \leq& Pr(E_1) + Pr(E_2)
+        \end{split}
+    \end{equation}
+    \hspace*{30pt} o que é verdade.\\
+
+    \textbf{Hipótese} : Vamos assumir que a equação
+    \begin{equation}
+        Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i\right) \leq \sum\limits_{i \geq 1}^{n}Pr(E_i)
+    \end{equation}
+    \hspace*{30pt} está correta para um $k \leq n$.\\
+
+    \textbf{Passo} : quero provar que para $k = n + 1$ a o hipótese segura
+
+    Assim temos \newline
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr\left(\bigcup\limits_{i \geq 1}^{n+1} E_i \right) \leq& \sum\limits_{i \geq 1}^{n+1}Pr(E_i)\\
+            Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i \cup E_{n+1}\right) \leq & \sum\limits_{i \geq 1}^{n}Pr(E_i) + Pr(E_{n+1})\\
+            Pr\left(\bigcup\limits_{i \geq 1}^{n} E_i\right) + Pr(E_{n+1}) - Pr\left(\left[\bigcup\limits_{i \geq 1}^{n} E_i\right]\cap E_{n+1}\right)  \leq &Pr(E_{n+1})\\
+            \text{pela hipótese de indução, temos}&\\
+            Pr(E_{n+1}) - Pr\left(\left[\bigcup\limits_{i \geq 1}^{n} E_i\right]\cap E_{n+1}\right) \leq & Pr(E_{n+1})
+        \end{split}
+    \end{equation}
+    Sendo assim, um número é sempre menor ou igual a ele mesmo, então a hipótese é verdadeira.
+\end{proof}
+
+\section{Exercício 2}
+\newtheorem{teo2}{Teorema}
+\begin{teo2}
+    Prove o princípio da Inclusão-Exclusão
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr\left(\bigcup_{i = 1}^{n}E_i\right) =& \sum\limits_{i=1}^{n}Pr(E_i)\\
+            & -\sum\limits_{1\leq i<j\leq n}^{n}Pr(E_i \cap E_j)\\
+            & +\sum\limits_{1\leq i<j<k\leq n}^{n}Pr(E_i \cap E_j \cap E_k)\\
+            & \ldots\\
+            & +(-1)^{n-1}Pr\left(\bigcap_{i=1}^{n}E_i\right)
+        \end{split}
+    \end{equation}
+\end{teo2}
+\begin{proof}
+    \hfill \break
+    \textbf{Base} : Para $n = 2$, temos
+    \begin{equation}
+    \notag
+        Pr(E_1 \cup E_2) = Pr(E_1) + Pr(E_2)- Pr(E_1 \cap E_2)
+    \end{equation}
+    \hspace*{30pt} o que é verdade.\\
+
+    \textbf{Hipótese} : Vamos assumir que a equação seja verdade para um $r \leq n$
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr\left(\bigcup_{i = 1}^{r}E_i\right) =& \sum\limits_{i=1}^{r}Pr(E_i)\\
+            & -\sum\limits_{1\leq i<j\leq r}^{r}Pr(E_i \cap E_j)\\
+            & +\sum\limits_{1\leq i<j<k\leq r}^{r}Pr(E_i \cap E_j \cap E_k)\\
+            & \ldots\\
+            & +(-1)^{r-1}Pr(\bigcap_{i=1}^{r}E_i)
+        \end{split}
+    \end{equation}
+    Vamos provar que a equação abaixo é verdadeira
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr\left(\bigcup_{i = 1}^{r+1}E_i\right) =& \sum\limits_{i=1}^{r+1}Pr(E_i)\\
+            & -\sum\limits_{1\leq i<j\leq r+1}^{r}Pr(E_i \cap E_j)\\
+            & +\sum\limits_{1\leq i<j<k\leq r+1}^{r}Pr(E_i \cap E_j \cap E_k)\\
+            & \ldots\\
+            & +(-1)^{(r+1)-1}Pr\left(\bigcap_{i=1}^{r+1}E_i\right)
+        \end{split}
+    \end{equation}
+
+    \textbf{Passo} : quero provar que para $k = n + 1$ a o hipótese segura para $r + 1$
+
+    \hspace*{30pt} Assim temos \newline
+    \begin{equation}
+    \label{eq:dev}
+        \begin{split}
+            Pr\left(\bigcup_{i = 1}^{r+1}E_i\right) =& Pr\left(\bigcup_{i = 1}^{r+1}E_i \cup E_{r+1}\right)\\
+            =& Pr\left(\bigcup_{i = 1}^{r+1}E_i) + Pr(E_{r+1}\right) - Pr\left(\bigcup_{i = 1}^{r+1}E_i \cup E_{r+1}\right)
+        \end{split}
+    \end{equation}
+    Considerando 
+    \begin{equation}
+        \notag
+        Pr\left(\bigcup_{i = 1}^{r+1}E_i \cup E_{r+1}\right)
+    \end{equation}
+    Podemos reescrever usando o fato \textit{Intersecção Distribuida sobre a União}, ficamos com
+
+    \begin{equation}
+        \notag
+        Pr\left(\bigcup_{i = 1}^{r+1}(E_i \cup E_{r+1})\right)
+    \end{equation}
+    Sendo assim, podemos aplicar a hipótese de indução
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr\left(\bigcup_{i = 1}^{r+1}(E_i \cup E_{r+1})\right) =& \sum\limits_{i=1}^{r}Pr(E_i \cap E_{r+1})\\
+            & -\sum\limits_{1\leq i<j\leq r}^{r}Pr(E_i \cap E_j \cap E_{r+1})\\
+            & +\sum\limits_{1\leq i<j<k\leq r}^{r}Pr(E_i \cap E_j \cap E_k \cap E_{r+1})\\
+            & \ldots\\
+            & +(-1)^{r-1}Pr\left(\bigcap_{i=1}^{r}E_i \cap E_{r+1}\right)
+        \end{split}
+    \end{equation}
+    Substituindo na equação \ref{eq:dev}, temos
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr\left(\bigcup_{i = 1}^{r+1}E_i\right)& + Pr(E_{r+1}) - \left(\sum\limits_{i=1}^{r}Pr(E_i \cap E_{r+1})\right)\\
+            & +\sum\limits_{1\leq i<j\leq r}^{r}Pr(E_i \cap E_j \cap E_{r+1})\\
+            & -\sum\limits_{1\leq i<j<k\leq r}^{r}Pr(E_i \cap E_j \cap E_k \cap E_{r+1})\\
+            & \ldots\\
+            & +(-1)^{r-1}Pr\left(\bigcap_{i=1}^{r}E_i \cap E_{r+1}\right)
+        \end{split}
+    \end{equation}
+    Disso, podemos reescrever, substituindo $Pr\left(\bigcup_{i = 1}^{r+1}E_i) + Pr(E_{r+1}\right)$
+    \begin{equation}
+    \notag
+        \begin{split}
+            Pr\left(\bigcup_{i = 1}^{r+1}E_i\right) =& \sum\limits_{i=1}^{r}Pr(E_i) + Pr(E_{r+1})\\
+            & -\sum\limits_{1\leq i<j\leq r}^{r}Pr(E_i \cap E_j) - \left(\sum\limits_{i=1}^{r}Pr(E_i \cap E_{r+1})\right)\\
+            & +\sum\limits_{1\leq i<j<k\leq r}^{r}Pr(E_i \cap E_j \cap E_k) + \left(\sum\limits_{1\leq i<j\leq r}^{r}Pr(E_i \cap E_j \cap E_{r+1})\right)\\
+            & -\sum\limits_{1\leq i<j<k<l\leq r}^{r}Pr(E_i \cap E_j \cap E_k \cap E_l) - \left(\sum\limits_{1\leq i<j<k\leq r}^{r}Pr(E_i \cap E_j \cap E_k \cap E_{r+1})\right)\\
+            & \ldots\\
+            & +(-1)^{r}Pr\left(\bigcap_{i=1}^{r}E_i \cap E_{r+1}\right)
+        \end{split}
+    \end{equation}
+\end{proof}
+
+\end{document}

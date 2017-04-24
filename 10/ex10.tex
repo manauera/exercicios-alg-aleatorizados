@@ -1,0 +1,242 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de Exercícios 12}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+Seja $X_i$ o número dado pelo dado $i$ e $X$ a soma de todas as v.a. $X_i$, ou seja
+
+\begin{equation}
+	\notag
+	X = \sum\limits_{i=1}^{100} X_i
+\end{equation}
+
+Então, 
+\begin{equation}
+	\notag
+	E[X_i] = \sum\limits_{j=1}^6 jPr(X_i = j) = \sum\limits_{j=1}^6 j\dfrac{1}{6} = \dfrac{7}{2}
+\end{equation}
+e disso,
+\begin{equation}
+	\notag
+	E[X] = \sum\limits_{j=1}^{100} E[X_i] = \sum\limits_{j=1}^{100} 3,5 = 350
+\end{equation}
+
+mais adiante,
+\begin{equation}
+	\notag
+	\begin{split}
+		E[X_i^2] &= \sum\limits_{j=1}^{6}j^2Pr(X_i = j)\\
+		&= \sum\limits_{j=1}^{6}j^2 \dfrac{1}{6}\\
+		\text{usando } \sum_{i=1}^ni^2 = n(n+1)(2n+1)/6 &\\
+		&= \dfrac{1}{6} . \dfrac{6(7)(13)}{6}\\
+		&= \dfrac{91}{6}
+	\end{split}
+\end{equation}
+
+Último passo é calcular a variancia de $X$, então
+
+\begin{equation}
+\notag
+	\begin{split}
+		Var(X) &= Var(\sum\limits_{i=1}^{100}X_i)\\
+		\text{pelo teo 3.3 do MU} &\\
+		&= \sum\limits_{i=1}^{100}Var(X_i)\\
+		&= \sum\limits_{i=1}^{100}E[X_i^2] - E[X]^2\\
+		&= \sum\limits_{i=1}^{100}\dfrac{91}{6} - (\dfrac{7}{2})^2\\
+		&= \sum\limits_{i=1}^{100}\dfrac{35}{12}
+	\end{split}
+\end{equation}
+
+Finalmente, temos
+
+\begin{equation}
+	\notag
+	Pr(|X - 350|\geq50) \leq \dfrac{\sum\limits_{i=1}^{100} 35/12}{50^2} = \dfrac{100 . 35/12}{50^2} = \dfrac{7}{60}
+\end{equation}
+
+\section{Exercício 2}
+\subsection*{(a)}
+Seja $Y = (X - E[X])^k$.\\
+
+Pela desigualdade de Markov, temos
+\begin{equation}
+	\label{eq:2a-1}
+	Pr(Y \geq t^kE[Y]) \geq \dfrac{E[Y]}{t^k E[Y]} = \dfrac{1}{t^k}
+\end{equation}
+
+então,
+\begin{equation}
+	\notag
+	\begin{split}
+		Pr(Y \geq t^kE[Y]) &= Pr(\sqrt[k]{Y} \geq t \sqrt[k]{E[Y]})\\
+		&= Pr(|X - E[X]| \geq t \sqrt[k]{E[(X - E[X])^k]})
+	\end{split}
+\end{equation}
+
+Como já tínhamos calculado em \ref{eq:2a-1},
+\begin{equation}
+	\notag
+	Pr(|X - E[X| \geq t \sqrt[k]{E[(X - E[X])^k]} ) \leq \dfrac{1}{t^k}
+\end{equation}
+
+\subsection*{(b)}
+Como $X$ pode ser qualquer variável aleatória, o valor $(X - E[X])^k$ para um $k$
+ímpar pode ser um número negativo, e portanto a \emph{desigualdade de Markov} não se aplica.
+
+\section{Exercício 3}
+\subsection*{(a)}
+Dado $b_i$ e $b_j$ o par de bits da v.a. $Y_i$, então
+\begin{equation}
+	\notag
+	Y_i =\begin{cases}
+		1, \text{ se }b_i = b_j\\
+		0, \text{ caso contrário}
+	\end{cases}
+\end{equation}
+
+Dado que nosso espaço amostral é
+\begin{equation}
+	\notag
+	\Omega = \{(0,0), (0,1), (1,0), (1,1) \}
+\end{equation}
+
+então temos
+\begin{equation}
+	\notag
+	\begin{split}
+		Pr(Y_i = 1) &= \dfrac{2}{8} = \dfrac{1}{4}\\
+		\text{e}&\\
+		Pr(Y_i = 0) &= \dfrac{2}{8} = \dfrac{1}{4}
+	\end{split}
+\end{equation}
+
+\subsection*{(b)}
+Seja $b_1, b_2, \ldots , b_n$ os $n$ bits aleatórios. Seja também $\oplus$ símbolo
+para o \emph{ou-exclusivo} e $Y_1 = b_1 \oplus b_2$, $Y_2 = b_2 \oplus b_3$ e $Y_3 = b_3 \oplus b_1$. Temos o seguinte
+
+\begin{equation}
+	\notag
+	Pr(Y_1 = 1 \cup Y_2 = 1 \cup Y_3 = 1) = 0 \neq Pr(Y_1 = 1). Pr(Y_2 = 1). Pr(Y_3 = 1)
+\end{equation}
+uma vez que se $Y_1 = 1$ e $Y_2 = 1$, então $b_1 = b_3$ e assim $Y_3 = 0$. Portanto, as
+v.a. $Y_i$ não são mutalmente independentes.
+
+\subsection*{(c)}
+Caso $Y_i$ e $Y_j$ não compartilhem nenhum bit, eles são independentes e pelo teorema 3.3 de MU, $E[Y_iY_j] = E[Y_i]E[Y_j]$.
+
+Caso $Y_i$ e $Y_j$ compartilhem um bit, temos
+\begin{equation}
+	\notag
+	\begin{split}
+		Y_i &= b_1 \oplus b_2\\
+		\text{ e }&\\
+		Y_j &= b_2 \oplus b_3
+	\end{split}
+\end{equation}
+
+Enumerando todos os possíveis valores para os bits $b_1$, $b_2$ e $b_3$, temos
+\begin{equation}
+	\notag
+	Pr(Y_i = 1 \cup Y_j = 1) = \dfrac{2}{8} = \dfrac{1}{4}
+\end{equation}
+
+Então, 
+\begin{equation}
+	\notag
+	\begin{split}
+		E[Y_iY_j] &= 1. Pr(Y_i = 1 \cup Y_j = 1)\\
+		&= 1.\dfrac{1}{4}\\
+		&= E[Y_i]E[Y_j]
+	\end{split}
+\end{equation}
+
+\subsection*{(d)}
+Em 3.15 do MU diz que dado uma v.a. $X = \sum\limits_{i=1}^n X_i$, então
+$E[X_iX_j] = E[X_i]E[X_j]$ para cada $i$ e $j$ t.q. $1 \leq i < j \leq n$,
+$Var(X) = \sum\limits_{i=1}^nVar(X_i)$.
+
+Então, 
+\begin{equation}
+	\notag
+	\begin{split}
+		Var[Y] &= Var\left[\sum\limits_{i=1}^{m}Y_i \right]\\
+		&= \sum\limits_{i=1}^{m}Var\left[Y_i \right]\\
+		&= \sum\limits_{i=1}^{m}\left(E[Y_i^2] - E[Y_i]^2 \right)\\
+		&= m. \left(\dfrac{1}{2} - \dfrac{1}{4} \right)\\
+		&= m . \dfrac{1}{4}\\
+		&= \dfrac{{n \choose 2}}{4}
+	\end{split}
+\end{equation}
+
+\subsection*{(e)}
+\begin{proof}
+	\begin{equation}
+		\notag
+		\begin{split}
+			Pr(|Y - E[Y]| \geq n) &= \dfrac{Var(Y)}{n^2}\\
+			&= \dfrac{\dfrac{{n \choose 2}}{4}}{n^2}\\
+			&= \dfrac{n(n-1)/8}{n^2}\\
+			&= \dfrac{n(n-1)}{8n^2}\\
+			&= \dfrac{1}{8} - \dfrac{1}{8n}
+		\end{split}
+	\end{equation}
+
+	Sendo assim, 
+	\begin{equation}
+		\notag
+		Pr(|Y - E[Y]| \geq n) = \dfrac{1}{8} - \Omega(n^{-1})
+	\end{equation}
+\end{proof}
+\end{document}
