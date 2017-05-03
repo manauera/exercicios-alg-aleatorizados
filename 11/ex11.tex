@@ -55,5 +55,29 @@
 
 \chapter{}
 \section{Exercício 1}
-\hspace*{15pt}
+\subsection*{(a)}
+\begin{equation}
+\notag
+	\begin{split}
+		M_X(t) = E[e^{tX}] &= \sum\limits_{k=0}^n e^{tk} {n \choose k} p^k(1-p)^{n-k}\\
+		&= \sum\limits_{k=0}^n{n \choose k}(pe^t)^k (1-p)^{n-k}\\
+		\text{pelo bin. de Newton}&\\
+		&= (pe^t + 1-p)^n
+	\end{split}
+\end{equation}
+
+\subsection*{(b)}
+Pelo teorema 4.3 do MU, temos
+\begin{equation}
+\notag
+	\begin{split}
+		M_{X+Y}(t) &= M_X(t)M_Y(t)\\
+		&= (pe^t + 1-p)^n . (pe^t + 1-p)^m\\
+		&= (pe^t + 1-p)^{n+m}
+	\end{split}
+\end{equation}
+
+\subsection*{(c)}
+Podemos concluir que a V.A. $Z = X + Y$, onde $X$ e $Y$ possuem a mesma probabilidade $p$ de 
+sucesso e $X$ com $n$ tentativas e $Y$ com $m$ tentativas, i.e. $Z = B(n+m, p)$, é uma \emph{f.g.m.} de $n+m$ tentativas e probabilidade $p$.
 \end{document}
