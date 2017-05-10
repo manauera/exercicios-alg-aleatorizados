@@ -1,0 +1,180 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de algoritmos aleatorizados}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+Seja $X_i$ a v.a. se Bob ganhau o i-ésimo jogo, para um $1\leq i \leq n$, então\\
+
+\begin{equation}
+	\notag
+	Pr[X_i = 1] = 0,4
+\end{equation}
+
+e para $X = \sum\limits_{i=1}^n X_i$,
+\begin{equation}
+	\notag
+	E[X] = \sum\limits_{i=1}^n E[X_i] = \sum\limits_{i=1}^n Pr[X_i = 1] = \sum\limits_{i=1}^n 0,4 = 0,4n
+\end{equation}
+
+Para Alice perder, Bob deve ganhar mais da metade dos jogos. Pela \emph{desigualdade de Chernoff}
+\begin{equation}
+	\notag
+	Pr[X > (1 + \delta)\mu] \leq e^{-\mu \delta^2 / 3}\text{, para um }0 < \delta \leq 1
+\end{equation}
+
+Então, temos
+
+\begin{equation}
+	\notag
+	\begin{split}
+		Pr[X > 0,5n] = Pr[X > (1 + 0,25)0,4n] &\leq e^{-\mu \delta / 3}\\
+		&= e^{-0,4n (0,25)^2 / 3} \\
+		&= e^{-0,4n 0,0125 / 3}\\
+		&= e^{-0,025n / 3}
+	\end{split}
+\end{equation}
+
+\section{Exercício 2}
+Seja $X$ o número de vezes em que um dado deu 6 em $n$ jogadas.
+
+Seja $p$ a probabilidade de $X \geq \dfrac{n}{4}$.
+
+Seja $X_i$ a v.a. correspondente a i-ésima jogada do dado e $X_i = 1$ se o dado der 6 e $X_i = 0$ caso contrário.
+
+\begin{equation}
+	\notag
+	E[X] = \sum\limits_{i=1}^nE[X_i] = \sum\limits_{i=1}^n Pr[X_i = 1] =  \sum\limits_{i=1}^n \dfrac{1}{6} = \dfrac{n}{6}
+\end{equation}
+
+Por \emph{Markov}, temos
+
+\begin{equation}
+	\begin{split}
+		Pr\left(X \geq \dfrac{n}{4}\right) &\leq \dfrac{E[X]}{n/4}\\
+		&= \dfrac{n/6}{n/4}\\
+		&= \dfrac{4n}{6n} = \dfrac{2}{3}
+	\end{split}
+\end{equation}
+
+Por \emph{Chebyshev}, temos
+\begin{equation}
+\notag
+	E[X^2] = \sum\limits_{i=1}^nE[X_i^2] = \sum\limits_{i=1}^n\dfrac{1}{6} = \dfrac{n}{6}
+\end{equation}
+
+então
+
+\begin{equation}
+	\begin{split}
+		Pr\left[X \geq \dfrac{n}{4}\right] &= Pr\left[|X - \dfrac{n}{6}|\geq \dfrac{n}{4} - \dfrac{n}{6}\right]\\
+		&= Pr\left[|X - \dfrac{n}{6}|\geq \dfrac{n}{12}\right]\\
+		&\leq \dfrac{Var(X)}{(n/12)^2}\\
+		&=\dfrac{E[X^2] - (E[X])^2}{n/144}\\
+		&= \dfrac{n/6 - n/36}{n/144}\\
+		&= \dfrac{20}{n}
+	\end{split}
+\end{equation}
+
+Por \emph{Chernoff}, temos
+\begin{equation}
+	\begin{split}
+		Pr\left[X \geq \dfrac{n}{4} \right] &= Pr\left[X \geq (1+0,5)\dfrac{n}{6} \right]\\
+		&\leq e^{-n/6(0,5)^2/3}\\
+		&= e^{-n/72}
+	\end{split}
+\end{equation}
+
+\section{Exercício 3}
+Seja $X$ o número total de caras e $X_i$ a v.a. que representa a chance da i-ésima 
+jogada der cara, temos\\
+
+\begin{equation}
+	\notag
+	Pr[X_i = 1] = \dfrac{1}{2}
+\end{equation}
+e
+\begin{equation}
+	\notag
+	E[X] = \sum\limits_{i=1}^{100}E[X_i] = \sum\limits_{i=1}^{100}\dfrac{1}{2} = 50
+\end{equation}
+
+Levando em conta a \emph{desigualdade de Chernoff}
+
+\begin{equation}
+	\notag
+	Pr[X\geq (1+\delta)\mu] \leq e^{-\mu \delta / 3}\text{, para um }0 \leq \delta \leq 1
+\end{equation}
+e $\mu = E[X]$.
+
+Temos
+\begin{equation}
+	\begin{split}
+		Pr[X \geq (1+0,1)50] &\leq e^{-50(0,1)^2/3}\\
+		&= e^{-0,5/3}\\
+		&= e^{-1/6}
+	\end{split}
+\end{equation}
+
+E para um $n = 1000$, vamos ter
+
+\begin{equation}
+	\begin{split}
+		Pr[X \geq (1+0,1)500] &\leq e^{-500(0,1)^2/3}\\
+		&= e^{-5/3}
+	\end{split}
+\end{equation}
+
+\end{document}
+
