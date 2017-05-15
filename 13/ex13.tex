@@ -1,0 +1,165 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de algoritmos aleatorizados}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\subsection*{(a)}
+\begin{proof}
+	Aplicando \emph{Markov}, temos
+	\begin{equation}
+		\begin{split}
+			Pr(X \geq (1 + \delta)U) &= Pr(e^{tX} \geq e^{(1+\delta)U})\\
+			&\leq \dfrac{E[e^{tX}]}{e^{t(1+\delta)U}}\\
+			&\leq \dfrac{e^{(e^t - 1)U}}{e^{t(1+\delta)U}}\\
+			\text{então, para um }\delta > 0 & \text{ podemos setar }t = ln(1+\delta)\\
+			Pr(X \geq (1 + \delta)U) &\leq \left(\dfrac{e^{\delta}}{{(1+\delta)^{(1 + \delta)}}}\right)^{U}
+		\end{split}
+	\end{equation}
+\end{proof}
+
+\subsection*{(b)}
+\begin{proof}
+	Para um $0 < \delta \leq 1$, vamos mostrar que
+	\begin{equation}
+	\notag
+		Pr( X \geq (1 + \delta)U) \leq e^{\dfrac{-U\delta^2}{3}}
+	\end{equation}
+	Pela prova anterior
+	\begin{equation}
+		\notag
+		\left(\dfrac{e^{\delta}}{{(1+\delta)^{(1 + \delta)}}}\right)^{U} \leq e^{\dfrac{-U\delta^2}{3}}
+	\end{equation}
+	Aplicando a \emph{raiz U}, teremos
+	\begin{equation}
+		\notag
+		\dfrac{e^{\delta}}{(1+\delta)^{(1 + \delta)}} \leq e^{-\delta^2/3}
+	\end{equation}
+
+	e tirando o logaritmo de cada lado ficamos com
+	\begin{equation}
+		\notag
+			f(\delta) = \delta - (1 + \delta)ln(1+\delta) + \dfrac{\delta^2}{3} \leq 0\\
+	\end{equation}
+
+	Tirando a derivada primeira e segunda, ficamos com seguinte
+	\begin{equation}
+		\begin{split}
+			f'(\delta) &= 1 - \dfrac{1+\delta}{1+\delta} - ln(1+\delta) + \dfrac{2\delta}{3}\\
+			&= - ln(1+\delta) + \dfrac{2\delta}{3}\\
+			f''(\delta)&= -\dfrac{1}{1+\delta} + \dfrac{2}{3}
+		\end{split}
+	\end{equation}
+
+	Como temos uma segunda derivada menor que zero ($f''(\delta) < 0$) para um $0 \leq \delta <
+	 1/2$, e maior que zero ($f''(\delta) > 0$) para um $\delta > 1/2$. Portanto, a primeira 
+	 derivada $f'(\delta)$ aumenta no interval $[0,1]$. Então, uma vez que $f'(0) = 0$ e 
+	 $f'(1) < 0$, podemos concluir que $f'(\delta) \leq 0$ no intervalo $[0,1]$.\\
+
+	 Assim, como $f(0) = 0$, temos uma função que começa em zero e decresce no intervalo $[0,1]$, provando o item (b).
+\end{proof}
+
+\section{Exercício 2}
+\subsection*{(a)}
+\begin{proof}
+	Usando \emph{desigualdade de Markov}, para qualquer $t < 0$, temos
+	\begin{equation}
+		\notag
+		\begin{split}
+			Pr(X \leq (1-\delta)\mu) & = Pr(e^{tX} \geq e^{t(1-\delta)\mu})\\
+			&\leq \dfrac{E[e^{tX}]}{e^{t(1-\delta)\mu}}\\
+			&\leq \dfrac{e^{(e^t-1)\mu}}{e^{t(1-\delta)\mu}}
+		\end{split}
+	\end{equation}
+
+	Para um $0 < \delta < 1$, podemos setar $t = ln(1-\delta)$ para obter
+	\begin{equation}
+		\begin{split}
+			Pr(X \leq (1-\delta)\mu) &\leq \dfrac{e^{(e^{ln(1-\delta)}-1)\mu}}{e^{ln(1 - \delta)(1-\delta)\mu}}\\
+			&\leq \dfrac{e^{(1-\delta - 1)\mu}}{(1-\delta)^{(1-\delta)\mu}}\\
+			&\leq \left(\dfrac{e^{-\delta}}{(1-\delta)^{(1-\delta)}}\right)^{\mu}
+		\end{split}
+	\end{equation}
+\end{proof}
+
+\subsection*{(b)}
+\begin{proof}
+	Para um $0 < \delta < 1$, mostrar que
+	\begin{equation}
+		\notag
+		\begin{split}
+			\left(\dfrac{e^{-\delta}}{(1-\delta)^{(1-\delta)}} \right)^{\mu} &\leq e^{-\mu\delta^2/2}\\
+			\dfrac{e^{-\delta}}{(1-\delta)^{(1-\delta)}} \leq e^{-\delta^2/2}
+		\end{split}
+	\end{equation}
+
+	Aplicando logaritmo dos dois lados, temos para um $0 < \delta < 1$
+	\begin{equation}
+		\notag
+		f(\delta) = -\delta - (1-\delta)ln(1-\delta) + \dfrac{\delta^2}{2} \leq 0
+	\end{equation}
+
+	Tirando as derivadas, ficamos com
+	\begin{equation}
+		\begin{split}
+			f'(\delta) &= ln(1-\delta) + \delta\\
+			f''(\delta) &= -\dfrac{1}{1-\delta} + 1
+		\end{split}
+	\end{equation}
+
+	Uma vez que a segunda derivada é menor que zero ($f''(\delta)<0$) no intervalo (0,1) e
+	como temos $f'(0) = 0$ e $f'(\delta)\leq 0$ no intervalo [0,1). Então podemos concluir que
+	$f(\delta) \leq 0$ para um $0 < \delta < 1$, provando item (b).
+\end{proof}
+\end{document}
