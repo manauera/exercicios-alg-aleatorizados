@@ -1,0 +1,127 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de algoritmos aleatorizados}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+\hspace*{15pt} Paradoxo é o oposto do que alguém pensa em ser
+verdade. Por isso consideramos o "paradoxo do aniversário" como
+sendo um paradoxo. Ao contrário do que se pensa, precisamos de poucas
+pessoas para se ter uma chance grande de ter pessoas com a mesma data 
+de aniversário.
+
+\section{Exercício 2}
+Assumindo que algo seja provável de acontecer tenha mais de 50\% de acontecer.\\
+
+Levando em conta que $m$ é a quantidade de pessoas, $n$ é a quantidade de 
+números possíveis e $p$ a probabilidade que queremos, temos\\
+
+\begin{equation}
+	\notag
+	\begin{split}
+		m &\approx \sqrt{-2n \ln p}\\
+		&= \sqrt{-2.10^4 \ln(1/2)}\\
+		&\approx 118
+	\end{split}
+\end{equation}
+
+Para que seja provável que exista em uma sala duas pessoas com os últimos 
+quatro números de registro iguais, temos que ter 118 pessoas nessa sala.
+
+Para que se tenha duas pessoas com exatamente o mesmo número de registro,
+apenas mudamos a quantidade de número disponíveis, ficamos com o seguinte
+\begin{equation}
+	\notag
+	\begin{split}
+		m &\approx \sqrt{-2n \ln p}\\
+		&= \sqrt{-2.10^9 \ln (1/2)}\\
+		&\approx 37.233
+	\end{split}
+\end{equation}
+
+Ou seja, a partir de $37.233$ pessoas, as chances são mais que 50\% 
+de termos duas pessoas com o mesmo número de registro.
+
+Se refizermos essa conta com um número de $11$ dígitos, ficamos com o seguinte
+
+\begin{equation}
+\notag
+	\begin{split}
+		m &\approx \sqrt{-2n \ln p}\\
+		&= \sqrt{-2.10^{11} \ln (1/2)}\\
+		&\approx 372.329
+	\end{split}
+\end{equation}
+
+O número de pessoas seria $372.329$, $10$x mais.
+
+\section{Exercício 3}
+Para calcular a probabilidade de se ter 3 pessoas com a mesma data de aniversário, é
+preciso calcular o complementar das probabilidades \emph{a probabilidade de se ter todas
+ datas distintas}, \emph{a probabilidade de se ter um par e as outras datas distintas}, 
+ \emph{a probabilidade de se ter dois pares e outras datas distintas}, etc.
+
+Então, podemos resumir a probabilidade de se ter ao menos 3 pessoas com datas de 
+aniversário iguais em um grupo de 100 alunos como sendo definido por:
+
+\begin{equation}
+	\notag
+	Pr(\text{ao menos 3 pessoas com o mesmo aniversário}) = 1 - \sum\limits_{i=0}^{n/2} Pr(E_{i})
+\end{equation}
+onde $E_i$ é o evento que $i$ pares de pessoas compartilhem o mesmo aniversário. Ou seja,
+$E_0$ é o evento onde todos os aniversários são distintos, $E_1$ onde há um par que 
+compartilhem o mesmo aniversário e o resto sejam distintos, etc.
+
+
+\end{document}
