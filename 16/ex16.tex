@@ -1,0 +1,92 @@
+\documentclass{article}
+
+\renewcommand{\thesection}{}
+\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
+\makeatletter
+\def\@seccntformat#1{\csname #1ignore\expandafter\endcsname\csname the#1\endcsname\quad}
+\let\sectionignore\@gobbletwo
+\let\latex@numberline\numberline
+\def\numberline#1{\if\relax#1\relax\else\latex@numberline{#1}\fi}
+\makeatother
+
+
+
+\usepackage[utf8]{inputenc}
+
+\title{Lista de algoritmos aleatorizados}
+\author{Gustavo Higuchi}
+\date{\today}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{color}   %May be necessary if you want to color links
+\usepackage[portuguese, ruled, linesnumbered]{algorithm2e}
+\usepackage[normalem]{ulem}
+
+\usepackage{mathtools}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+% usado para linkar cada section na tabela de conteúdo com a respectiva
+% página no documento
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black,
+    linktoc=all
+}
+
+%o começo do documento
+\begin{document}
+
+% compila o título
+\maketitle
+
+% compila a tabela de conteúdos
+\tableofcontents
+\newpage
+
+
+\chapter{}
+\section{Exercício 1}
+
+
+\begin{itemize}
+    \item Find $c_1$
+    Para achar a probabilidade de se ter no máximo 1 em cada cesto
+    \begin{equation}
+    \notag
+        \begin{split}
+        Pr(maximo=1) &= (1-\frac{1}{n})(1-\frac{2}{n})\cdots (1-\frac{c_1\sqrt{n}}{n}) \\
+        &\le \prod_{i=1}^{c_1\sqrt{n}-1} \left(1 - \dfrac{i}{n}\right) \\
+        &\le \prod_{i=1}^{c_1\sqrt{n}-1} e^{-\frac{i}{n}} \\
+        &= e^{\frac{c_1\sqrt{n}-c_1^2n}{2n}} \\
+        &\le e^{\frac{c_1-c_1^2}{2}}
+        \end{split}
+    \end{equation}
+    Setando $\frac{c_1-c_1^2}{2} \le -1$, obtemos $c_1 \ge 2$.
+    \item
+    Para a segunda parte, temos que a chance de não ter dois em um mesmo cesto é de pelo 
+    menos
+    \begin{equation}
+    \notag
+        \begin{split}
+        Pr(MaxLoad=1) &= (1-\frac{1}{n})(1-\frac{2}{n})\cdots (1-\frac{c_2\sqrt{n}}{n}) \\
+        &\ge \prod_{i=1}^{c_2\sqrt{n}-1} e^{-\frac{i}{n}-\frac{i^2}{n^2}} \\
+        &= e^{ -\frac{c_2\sqrt{n}(c_2\sqrt{n})}{2n} -\frac{(c_2\sqrt{n}-1)c_2\sqrt{n}(2c_2\sqrt{n}-1)}{6n^2}} \\
+        &\ge e^{ -\frac{c_2^2}{2} -\frac{2c_2^3n\sqrt{n}}{6n^2} } \\
+        &\ge e^{ -\frac{c_2^2}{2} -\frac{c_2^3}{3} } \\
+        &\ge 1 -\frac{c_2^2}{2} -\frac{c_2^3}{3}
+        \end{split}
+    \end{equation}
+    Setando $1 -\frac{c_2^2}{2} -\frac{c_2^3}{3} \ge \frac{1}{2}$, obtemos $0 \le c_2 \le 0.8$ .
+\end{itemize}
+
+\section{Exercício 2}
+\end{document}
